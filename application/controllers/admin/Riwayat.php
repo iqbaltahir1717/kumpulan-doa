@@ -36,7 +36,7 @@ class Riwayat extends CI_Controller
 
         //DATA
         $data['setting'] = getSetting();
-        $data['title']   = 'Bidang';
+        $data['title']   = 'Riwayat';
         $data['riwayat']   = $this->m_riwayat->read($perPage, $page, '');
 
 
@@ -70,7 +70,7 @@ class Riwayat extends CI_Controller
 
         //DATA
         $data['setting'] = getSetting();
-        $data['title']   = 'Bidang';
+        $data['title']   = 'Riwayat';
         $data['riwayat']   = $this->m_riwayat->read($perPage, $page, $data['search']);
 
         // TEMPLATE
@@ -90,12 +90,12 @@ class Riwayat extends CI_Controller
         $this->m_riwayat->create($data);
 
         // LOG
-        $message    = $this->session->userdata('user_name') . " menambah data kategori bidang berita " . $data['riwayat_name'];
+        $message    = $this->session->userdata('user_name') . " menambah data riwayat " . $data['riwayat_name'];
         createLog($message);
 
         // ALERT
         $alertStatus  = "success";
-        $alertMessage = "Berhasil menambah data kategori bidang berita " . $data['riwayat_name'];
+        $alertMessage = "Berhasil menambah data riwayat " . $data['riwayat_name'];
         getAlert($alertStatus, $alertMessage);
 
         redirect('admin/riwayat');
@@ -111,12 +111,12 @@ class Riwayat extends CI_Controller
         $this->m_riwayat->update($data);
 
         // LOG
-        $message    = $this->session->userdata('user_name') . " mengubah data kategori bidang berita dengan ID = " . $data['riwayat_id'] . " - " . $data['riwayat_name'];
+        $message    = $this->session->userdata('user_name') . " mengubah data riwayat dengan ID = " . $data['riwayat_id'] . " - " . $data['riwayat_name'];
         createLog($message);
 
         // ALERT
         $alertStatus  = "success";
-        $alertMessage = "Berhasil mengubah data kategori bidang berita : " . $data['riwayat_name'];
+        $alertMessage = "Berhasil mengubah data riwayat : " . $data['riwayat_name'];
         getAlert($alertStatus, $alertMessage);
 
         redirect('admin/riwayat');
@@ -130,12 +130,12 @@ class Riwayat extends CI_Controller
         $this->m_riwayat->delete($this->input->post('riwayat_id'));
 
         // LOG
-        $message    = $this->session->userdata('user_name') . " menghapus data kategori bidang berita dengan ID = " . $this->input->post('riwayat_id') . " - " . $this->input->post('riwayat_name');
+        $message    = $this->session->userdata('user_name') . " menghapus data riwayat dengan ID = " . $this->input->post('riwayat_id') . " - " . $this->input->post('riwayat_name');
         createLog($message);
 
         // ALERT
         $alertStatus  = "failed";
-        $alertMessage = "Menghapus data kategori bidang berita : " . $this->input->post('riwayat_name');
+        $alertMessage = "Menghapus data riwayat : " . $this->input->post('riwayat_name');
         getAlert($alertStatus, $alertMessage);
 
         redirect('admin/riwayat');

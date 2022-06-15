@@ -146,7 +146,7 @@ class Doa extends CI_Controller
         $data['doa_slug']        = url_title($data['doa_title'], 'dash', true);
         if ($this->input->post('riwayat_id') == null) {
             $data['riwayat_id']  = "-";
-            $data['kategori_id'] = "-";
+            $data['kategori_id'] = $this->input->post('kategori_id');
             $data['tingkat_hadits'] = "-";
         } else {
             $data['riwayat_id']         = implode(', ', $this->input->post('riwayat_id'));
@@ -183,7 +183,7 @@ class Doa extends CI_Controller
         $data['doa_slug']        = url_title($data['doa_title'], 'dash', true);
         if ($this->input->post('riwayat_id') == null) {
             $data['riwayat_id']  = "-";
-            $data['kategori_id'] = "-";
+            $data['kategori_id'] = $this->input->post('kategori_id');
             $data['tingkat_hadits'] = "-";
         } else {
             $data['riwayat_id']         = implode(', ', $this->input->post('riwayat_id'));

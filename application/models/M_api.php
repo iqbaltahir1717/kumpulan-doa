@@ -18,7 +18,6 @@ class M_api extends CI_Model
         $this->db->join('tbl_kategori d', 'a.kategori_id=d.kategori_id', 'LEFT');
 
         $this->db->order_by('a.doa_id', 'DESC');
-
         $query = $this->db->get();
         if ($query->num_rows() > 0) {
             foreach ($query->result() as $row) {
@@ -29,10 +28,20 @@ class M_api extends CI_Model
         return null;
     }
 
-    public function get($id)
+    public function get_detail_doa($id)
     {
+        $this->db->select('*');
+        $this->db->from('tbl_doa');
         $this->db->where('doa_id', $id);
-        $query = $this->db->get('tbl_doa', 1);
+        $query = $this->db->get();
+        return $query->result();
+    }
+
+    public function get_doa()
+    {
+        $this->db->select('*');
+        $this->db->from('tbl_doa');
+        $query = $this->db->get();
         return $query->result();
     }
 }

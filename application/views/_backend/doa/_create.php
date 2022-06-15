@@ -42,17 +42,7 @@
                             <span for="">&nbsp; Hadits</span>
                         </div>
                         <div class="form-group">
-                            <label for=""><b style="color: black">Riwayat</b></label>
-                            <select class="form-control select2" id="riwayat" max=3 name="riwayat_id[]" multiple required style="width:100%">
-                                <?php
-                                foreach ($riwayat as $f) {
-                                    echo '<option value="' . $f->riwayat_id . '">' . $f->riwayat_name . '</option>';
-                                }
-                                ?>
-                            </select>
-                        </div>
-                        <div class="form-group">
-                            <label for=""><b style="color: black">Kategori</b></label>
+                            <label for=""><b style="color: black">Kategori <span style="color:red">*</span></b></label>
                             <select class="form-control select2" id="kategori" name="kategori_id" required style="width:100%">
                                 <option value="">-Pilih Kategori-</option>
                                 <?php
@@ -60,7 +50,16 @@
                                     echo '<option value="' . $nw->kategori_id . '">' . $nw->kategori_name . '</option>';
                                 }
                                 ?>
-
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for=""><b style="color: black">Riwayat</b></label>
+                            <select class="form-control select2" id="riwayat" max=3 name="riwayat_id[]" multiple required style="width:100%">
+                                <?php
+                                foreach ($riwayat as $f) {
+                                    echo '<option value="' . $f->riwayat_id . '">' . $f->riwayat_name . '</option>';
+                                }
+                                ?>
                             </select>
                         </div>
                         <div class="form-group">
@@ -103,18 +102,14 @@
         if ($("#sumber").is(":checked")) {
             $('#riwayat').prop('disabled', 'disabled');
             $('#tingkat').prop('disabled', 'disabled');
-            $('#kategori').prop('disabled', 'disabled');
             $('#tingkat').removeAttr('required', false);
-            $('#kategori').removeAttr('required', false);
             $('#riwayat').removeAttr('required', false);
         }
         if ($("#sumber2").is(":checked")) {
             $('#riwayat').removeAttr('disabled', false);
             $('#tingkat').removeAttr('disabled', false);
-            $('#kategori').removeAttr('disabled', false);
             $('#riwayat').prop('required', 'required');
             $('#tingkat').prop('required', 'required');
-            $('#kategori').prop('required', 'required');
         }
     };
     $(update_sumber);

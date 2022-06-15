@@ -64,9 +64,9 @@
                                             <?php echo form_open("admin/riwayat/create") ?>
                                             <div class="modal-body">
                                                 <div class="form-group">
-                                                    <label for=""><b style="color: black">Nama Kategori Bidang <span style="color:red">*</span></b></label>
+                                                    <label for=""><b style="color: black">Nama Riwayat <span style="color:red">*</span></b></label>
                                                     <?php echo csrf(); ?>
-                                                    <input type="text" class="form-control" placeholder="Nama Kategori Bidang" name="riwayat_name" required="required">
+                                                    <input type="text" class="form-control" placeholder="Nama Riwayat" name="riwayat_name" required="required">
                                                 </div>
                                             </div>
                                             <div class="modal-footer">
@@ -94,7 +94,7 @@
                                 <tr style="background-color: gray;color:white">
                                     <th style="width: 60px">No</th>
                                     <th style="width: 20%">#aksi</th>
-                                    <th>Nama Kategori Bidang</th>
+                                    <th>Nama Riwayat</th>
                                 </tr>
                                 <?php
                                 if ($riwayat) {
@@ -126,9 +126,9 @@
                                                     <?php echo form_open("admin/riwayat/update") ?>
                                                     <div class="modal-body">
                                                         <div class="form-group">
-                                                            <label for=""><b style="color: black">Nama Kategori Bidang <span style="color:red">*</span></b></label>
+                                                            <label for=""><b style="color: black">Nama Riwayat <span style="color:red">*</span></b></label>
                                                             <?php echo csrf(); ?>
-                                                            <input type="text" class="form-control" placeholder="Nama Kategori Bidang" name="riwayat_name" required="required" value="<?php echo $key->riwayat_name; ?>">
+                                                            <input type="text" class="form-control" placeholder="Nama Riwayat" name="riwayat_name" required="required" value="<?php echo $key->riwayat_name; ?>">
                                                             <input type="hidden" class="form-control" name="riwayat_id" required="required" value="<?php echo $key->riwayat_id; ?>">
                                                         </div>
                                                     </div>
@@ -155,7 +155,7 @@
                                                     <div class="modal-body">
                                                         Apakah anda yakin akan menghapus data riwayat : <?php echo $key->riwayat_name; ?> ?
                                                         <?php echo csrf(); ?>
-                                                        <input type="hidden" class="form-control" placeholder="Nama Kategori Bidang" name="riwayat_name" required="required" value="<?php echo $key->riwayat_name; ?>">
+                                                        <input type="hidden" class="form-control" placeholder="Nama Riwayat" name="riwayat_name" required="required" value="<?php echo $key->riwayat_name; ?>">
                                                         <input type="hidden" class="form-control" name="riwayat_id" required="required" value="<?php echo $key->riwayat_id; ?>">
                                                     </div>
                                                     <div class="modal-footer">
@@ -179,7 +179,7 @@
                                                     </div>
 
                                                     <div class="modal-body">
-                                                        <b>Nama Kategori Bidang :</b><br><?php echo $key->riwayat_name; ?>
+                                                        <b>Nama Riwayat :</b><br><?php echo $key->riwayat_name; ?>
 
                                                     </div>
                                                     <div class="modal-footer">

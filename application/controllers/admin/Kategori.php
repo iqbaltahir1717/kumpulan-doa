@@ -70,7 +70,7 @@ class Kategori extends CI_Controller
 
         //DATA
         $data['setting']       = getSetting();
-        $data['title']         = 'Kategori Informasi';
+        $data['title']         = 'Kategori Doa';
         $data['kategori'] = $this->m_kategori->read($perPage, $page, $data['search']);
 
         // TEMPLATE
@@ -90,12 +90,12 @@ class Kategori extends CI_Controller
         $this->m_kategori->create($data);
 
         // LOG
-        $message    = $this->session->userdata('user_name') . " menambah data kategori informasi " . $data['kategori_name'];
+        $message    = $this->session->userdata('user_name') . " menambah data kategori " . $data['kategori_name'];
         createLog($message);
 
         // ALERT
         $alertStatus  = "success";
-        $alertMessage = "Berhasil menambah data kategori informasi " . $data['kategori_name'];
+        $alertMessage = "Berhasil menambah data kategori " . $data['kategori_name'];
         getAlert($alertStatus, $alertMessage);
 
         redirect('admin/kategori');
@@ -111,12 +111,12 @@ class Kategori extends CI_Controller
         $this->m_kategori->update($data);
 
         // LOG
-        $message    = $this->session->userdata('user_name') . " mengubah data kategori informasi dengan ID = " . $data['kategori_id'] . " - " . $data['kategori_name'];
+        $message    = $this->session->userdata('user_name') . " mengubah data kategori dengan ID = " . $data['kategori_id'] . " - " . $data['kategori_name'];
         createLog($message);
 
         // ALERT
         $alertStatus  = "success";
-        $alertMessage = "Berhasil mengubah data kategori informasi : " . $data['kategori_name'];
+        $alertMessage = "Berhasil mengubah data kategori : " . $data['kategori_name'];
         getAlert($alertStatus, $alertMessage);
 
         redirect('admin/kategori');
@@ -130,12 +130,12 @@ class Kategori extends CI_Controller
         $this->m_kategori->delete($this->input->post('kategori_id'));
 
         // LOG
-        $message    = $this->session->userdata('user_name') . " menghapus data kategori informasi dengan ID = " . $this->input->post('kategori_id') . " - " . $this->input->post('kategori_name');
+        $message    = $this->session->userdata('user_name') . " menghapus data kategori dengan ID = " . $this->input->post('kategori_id') . " - " . $this->input->post('kategori_name');
         createLog($message);
 
         // ALERT
         $alertStatus  = "failed";
-        $alertMessage = "Menghapus data kategori informasi : " . $this->input->post('kategori_name');
+        $alertMessage = "Menghapus data kategori : " . $this->input->post('kategori_name');
         getAlert($alertStatus, $alertMessage);
 
         redirect('admin/kategori');

@@ -30,8 +30,8 @@
                 </div>
             </div>
             <div class="box-body">
-                <b>Judul Doa :</b><br> <?php echo $panduan[0]->panduan_title; ?><br><br>
-                <b>Isi Doa :</b><br> <?php echo $panduan[0]->panduan_deskripsi; ?>
+                <b>Judul Panduan :</b><br> <?php echo $panduan[0]->panduan_title; ?><br><br>
+                <b>Isi Panduan :</b><br> <?php echo $panduan[0]->panduan_deskripsi; ?>
             </div>
             <div class="box-footer">
                 <small>Page rendered in <strong>{elapsed_time}</strong> seconds.</small>

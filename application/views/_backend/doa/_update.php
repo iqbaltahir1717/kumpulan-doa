@@ -52,6 +52,22 @@
                                         <?php } ?>
                                     </div>
                                     <div class="form-group">
+                                        <label for=""><b style="color: black">Kategori <span style="color:red">*</span></b></label>
+                                        <select class="form-control select2" id="kategori" name="kategori_id" required style="width:100%">
+                                            <option value="">-Pilih Kategori-</option>
+                                            <?php
+                                            foreach ($kategori as $nw) {
+                                                if ($doa[0]->kategori_id == $nw->kategori_id) {
+                                                    echo '<option value="' . $nw->kategori_id . '" selected>' . $nw->kategori_name . '</option>';
+                                                } else {
+                                                    echo '<option value="' . $nw->kategori_id . '">' . $nw->kategori_name . '</option>';
+                                                }
+                                            }
+                                            ?>
+
+                                        </select>
+                                    </div>
+                                    <div class="form-group">
                                         <label for=""><b style="color: black">Riwayat <span style="color:red">*</span></b></label>
                                         <select class="form-control select2" id="riwayat" name="riwayat_id[]" multiple required style="width:100%">
                                             <?php
@@ -63,22 +79,6 @@
                                                     } else {
                                                         echo '<option value="' . $f->riwayat_id . '">' . $f->riwayat_name . '</option>';
                                                     }
-                                                }
-                                            }
-                                            ?>
-
-                                        </select>
-                                    </div>
-                                    <div class="form-group">
-                                        <label for=""><b style="color: black">Kategori <span style="color:red">*</span></b></label>
-                                        <select class="form-control select2" id="kategori" name="kategori_id" required style="width:100%">
-                                            <option value="">-Pilih Kategori-</option>
-                                            <?php
-                                            foreach ($kategori as $nw) {
-                                                if ($doa[0]->kategori_id == $nw->kategori_id) {
-                                                    echo '<option value="' . $nw->kategori_id . '" selected>' . $nw->kategori_name . '</option>';
-                                                } else {
-                                                    echo '<option value="' . $nw->kategori_id . '">' . $nw->kategori_name . '</option>';
                                                 }
                                             }
                                             ?>
@@ -131,18 +131,14 @@
                     if ($("#sumber").is(":checked")) {
                         $('#riwayat').prop('disabled', 'disabled');
                         $('#tingkat').prop('disabled', 'disabled');
-                        $('#kategori').prop('disabled', 'disabled');
                         $('#tingkat').removeAttr('required', false);
-                        $('#kategori').removeAttr('required', false);
                         $('#riwayat').removeAttr('required', false);
                     }
                     if ($("#sumber2").is(":checked")) {
                         $('#riwayat').removeAttr('disabled', false);
                         $('#tingkat').removeAttr('disabled', false);
-                        $('#kategori').removeAttr('disabled', false);
                         $('#riwayat').prop('required', 'required');
                         $('#tingkat').prop('required', 'required');
-                        $('#kategori').prop('required', 'required');
                     }
                 };
                 $(update_sumber);
