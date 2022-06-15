@@ -42,6 +42,7 @@ class Doa extends CI_Controller
         $data['setting'] = getSetting();
         $data['title']   = 'Kumpulan Doa';
         $data['doa']    = $this->m_doa->read($perPage, $page, '', '', '');
+        $data['riwayat']         = $this->m_riwayat->read('', '', '');
 
 
         // TEMPLATE
@@ -76,6 +77,7 @@ class Doa extends CI_Controller
         $data['setting'] = getSetting();
         $data['title']   = 'Kumpulan Doa';
         $data['doa']    = $this->m_doa->read($perPage, $page, $data['search'], '', '');
+        $data['riwayat']         = $this->m_riwayat->read('', '', '');
 
         // TEMPLATE
         $view         = "_backend/doa/data";
@@ -88,7 +90,7 @@ class Doa extends CI_Controller
     {
         //DATA
         $data['setting']       = getSetting();
-        $data['title']         = 'Informasi';
+        $data['title']         = 'Tambah Doa';
         $data['riwayat']         = $this->m_riwayat->read('', '', '',);
         $data['kategori'] = $this->m_kategori->read('', '', '');
 
@@ -103,7 +105,7 @@ class Doa extends CI_Controller
     {
         //DATA
         $data['setting']       = getSetting();
-        $data['title']         = 'Informasi';
+        $data['title']         = 'Update Doa';
         $data['doa']          = $this->m_doa->get($this->uri->segment(4));
         $data['riwayat']         = $this->m_riwayat->read('', '', '');
         $data['kategori'] = $this->m_kategori->read('', '', '');
@@ -119,7 +121,7 @@ class Doa extends CI_Controller
     {
         //DATA
         $data['setting']       = getSetting();
-        $data['title']         = 'Informasi';
+        $data['title']         = 'Detail Doa';
         $data['doa']          = $this->m_doa->get($this->uri->segment(4));
         $data['riwayat']         = $this->m_riwayat->read('', '', '');
         $data['kategori'] = $this->m_kategori->read('', '', '');
@@ -134,37 +136,24 @@ class Doa extends CI_Controller
     public function create()
     {
         csrfValidate();
-
-        $filename_1              = "thumbnaildoa-" . date('YmdHis');
-        $config['upload_path']   = "./upload/doa/";
-        $config['allowed_types'] = "jpg|png|jpeg";
-        $config['overwrite']     = "true";
-        $config['max_size']      = "0";
-        $config['max_width']     = "10000";
-        $config['max_height']    = "10000";
-        $config['file_name']     = '' . $filename_1;
-        $this->upload->initialize($config);
-        if (!$this->upload->do_upload('doa_cover')) {
-            // ALERT
-            $alertStatus  = "failed";
-            $alertMessage = $this->upload->display_errors();
-            getAlert($alertStatus, $alertMessage);
-        } else {
-            $dat  = $this->upload->data();
-            $data['doa_cover']       = $dat['file_name'];
-        }
-
-
         // POST
         $data['doa_id']          = '';
         $data['doa_title']       = $this->input->post('doa_title');
+        $data['doa_sumber']       = $this->input->post('doa_sumber');
         $data['doa_text']        = $this->input->post('doa_text');
         $data['doa_date']        = date('Y-m-d');
         $data['doa_count_view']  = 0;
         $data['doa_slug']        = url_title($data['doa_title'], 'dash', true);
-        $data['riwayat_id']         = $this->input->post('riwayat_id');
-        $data['kategori_id'] = $this->input->post('kategori_id');
-        $data['tingkat_hadits'] = $this->input->post('tingkat_hadits');
+        if ($this->input->post('riwayat_id') == null) {
+            $data['riwayat_id']  = "-";
+            $data['kategori_id'] = "-";
+            $data['tingkat_hadits'] = "-";
+        } else {
+            $data['riwayat_id']         = implode(', ', $this->input->post('riwayat_id'));
+            $data['kategori_id'] = $this->input->post('kategori_id');
+            $data['tingkat_hadits'] = $this->input->post('tingkat_hadits');
+        }
+
         $data['user_id']          = $this->session->userdata('user_id');
         $data['createtime']       = date('Y-m-d H:i:s');
         $this->m_doa->create($data);
@@ -186,67 +175,32 @@ class Doa extends CI_Controller
     {
         csrfValidate();
 
-        if ($_FILES['doa_cover']['name'] != "") {
-            $filename_1              = "thumbnaildoa-" . date('YmdHis');
-            $config['upload_path']   = "./upload/doa/";
-            $config['allowed_types'] = "jpg|png|jpeg";
-            $config['overwrite']     = "true";
-            $config['max_size']      = "0";
-            $config['max_width']     = "10000";
-            $config['max_height']    = "10000";
-            $config['file_name']     = '' . $filename_1;
-            $this->upload->initialize($config);
-            if (!$this->upload->do_upload('doa_cover')) {
-
-                // ALERT
-                $alertStatus  = "failed";
-                $alertMessage = $this->upload->display_errors();
-                getAlert($alertStatus, $alertMessage);
-            } else {
-                $dat  = $this->upload->data();
-
-                unlink('./upload/doa/' . $this->input->post('doa_cover_old'));
-
-
-                $data['doa_id']          = $this->input->post('doa_id');
-                $data['doa_title']       = $this->input->post('doa_title');
-                $data['doa_cover']       = $dat['file_name'];
-                $data['doa_text']        = $this->input->post('doa_text');
-                $data['doa_slug']        = url_title($data['doa_title'], 'dash', true);
-                $data['riwayat_id']         = $this->input->post('riwayat_id');
-                $data['tingkat_hadits'] = $this->input->post('tingkat_hadits');
-                $data['kategori_id'] = $this->input->post('kategori_id');
-                $this->m_doa->update($data);
-
-                // LOG
-                $message    = $this->session->userdata('user_name') . " mengubah data doa dengan ID = " . $data['doa_id'];
-                createLog($message);
-
-                // ALERT
-                $alertStatus  = "success";
-                $alertMessage = "Berhasil mengubah data doa ID : " . $data['doa_id'];
-                getAlert($alertStatus, $alertMessage);
-            }
+        // POST
+        $data['doa_id']          = $this->input->post('doa_id');
+        $data['doa_title']       = $this->input->post('doa_title');
+        $data['doa_sumber']       = $this->input->post('doa_sumber');
+        $data['doa_text']        = $this->input->post('doa_text');
+        $data['doa_slug']        = url_title($data['doa_title'], 'dash', true);
+        if ($this->input->post('riwayat_id') == null) {
+            $data['riwayat_id']  = "-";
+            $data['kategori_id'] = "-";
+            $data['tingkat_hadits'] = "-";
         } else {
-            // POST
-            $data['doa_id']          = $this->input->post('doa_id');
-            $data['doa_title']       = $this->input->post('doa_title');
-            $data['doa_text']        = $this->input->post('doa_text');
-            $data['doa_slug']        = url_title($data['doa_title'], 'dash', true);
-            $data['riwayat_id']         = $this->input->post('riwayat_id');
-            $data['tingkat_hadits'] = $this->input->post('tingkat_hadits');
+            $data['riwayat_id']         = implode(', ', $this->input->post('riwayat_id'));
             $data['kategori_id'] = $this->input->post('kategori_id');
-            $this->m_doa->update($data);
-
-            // LOG
-            $message    = $this->session->userdata('user_name') . " mengubah data doa dengan ID = " . $data['doa_id'];
-            createLog($message);
-
-            // ALERT
-            $alertStatus  = "success";
-            $alertMessage = "Berhasil mengubah data doa ID : " . $data['doa_id'];
-            getAlert($alertStatus, $alertMessage);
+            $data['tingkat_hadits'] = $this->input->post('tingkat_hadits');
         }
+        $this->m_doa->update($data);
+
+        // LOG
+        $message    = $this->session->userdata('user_name') . " mengubah data doa dengan ID = " . $data['doa_id'];
+        createLog($message);
+
+        // ALERT
+        $alertStatus  = "success";
+        $alertMessage = "Berhasil mengubah data doa ID : " . $data['doa_id'];
+        getAlert($alertStatus, $alertMessage);
+
 
 
 

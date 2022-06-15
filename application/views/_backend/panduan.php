@@ -109,6 +109,7 @@
                                         <tr>
                                             <td><?php echo $no + $numbers; ?></td>
                                             <td>
+                                                <a href="<?php echo site_url('admin/panduan/detail_page/' . $key->panduan_id) ?>" class="btn btn-xs btn-flat btn-info">detail</a>
                                                 <a href="<?php echo site_url('admin/panduan/update_page/' . $key->panduan_id) ?>" class="btn btn-xs btn-flat btn-warning">update</a>
 
                                                 <button class="btn btn-xs btn-flat btn-danger" data-toggle="modal" data-target="#modalDelete<?php echo $key->panduan_id ?>">hapus</button>

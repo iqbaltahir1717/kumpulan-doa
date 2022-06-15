@@ -36,7 +36,7 @@ class Kategori extends CI_Controller
 
         //DATA
         $data['setting']       = getSetting();
-        $data['title']         = 'Kategori Informasi';
+        $data['title']         = 'Kategori Doa';
         $data['kategori'] = $this->m_kategori->read($perPage, $page, '');
 
 

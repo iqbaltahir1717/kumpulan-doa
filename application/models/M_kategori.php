@@ -12,6 +12,8 @@ class M_kategori extends CI_Model
     {
         $this->db->select('*');
         $this->db->from('tbl_kategori');
+        // $this->db->where_not_in('kategori_id', 0);
+        $this->db->where("kategori_id != 0 ");
 
         if ($key != '') {
             $this->db->like("kategori_name", $key);

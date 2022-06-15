@@ -137,5 +137,26 @@
                             <li><a href="<?php echo site_url('admin/log'); ?>"><i class="fa fa-circle-o text-red"></i> <span>Log User</span></a></li>
                         </ul>
                     <?php } ?>
+
+                    <?php if ($this->session->userdata('user_group') == 2) { ?>
+                        <!-- Administrator Menu -->
+                        <ul class="sidebar-menu" data-widget="tree">
+                            <li class="header">Pengaturan Utama</li>
+                            <li class="active"><a href="<?php echo site_url('admin/dashboard') ?>"><i class="fa fa-dashboard"></i> <span>Dashboard</span></a></li>
+                            <li class="treeview">
+                                <a href="#"> <i class="fa fa-newspaper-o"></i> <span>Kumpulan Doa</span>
+                                    <span class="pull-right-container">
+                                        <i class="fa fa-angle-left pull-right"></i>
+                                    </span>
+                                </a>
+                                <ul class="treeview-menu">
+                                    <li><a href="<?php echo site_url('admin/doa') ?>"><i class="fa fa-circle-o"></i> List Kumpulan Doa</a></li>
+                                    <!-- <li><a href="<?php echo site_url('admin/kategori') ?>"><i class="fa fa-circle-o"></i> Kategori</a></li> -->
+                                    <!-- <li><a href="<?php echo site_url('admin/riwayat') ?>"><i class="fa fa-circle-o"></i> Riwayat</a></li> -->
+                                </ul>
+                            </li>
+                            <li><a href="<?php echo site_url('admin/panduan') ?>"> <i class="fa fa-newspaper-o"></i> <span>Kumpulan Panduan</span></a></li>
+                        </ul>
+                    <?php } ?>
                 </section>
             </aside>

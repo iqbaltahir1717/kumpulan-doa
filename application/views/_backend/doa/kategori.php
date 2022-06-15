@@ -64,9 +64,9 @@
                                             <?php echo form_open("admin/kategori/create") ?>
                                             <div class="modal-body">
                                                 <div class="form-group">
-                                                    <label for=""><b style="color: black">Nama Kategori Informasi <span style="color:red">*</span></b></label>
+                                                    <label for=""><b style="color: black">Nama Kategori Doa <span style="color:red">*</span></b></label>
                                                     <?php echo csrf(); ?>
-                                                    <input type="text" class="form-control" placeholder="Nama Kategori Informasi" name="kategori_name" required="required">
+                                                    <input type="text" class="form-control" placeholder="Nama Kategori Doa" name="kategori_name" required="required">
                                                 </div>
                                             </div>
                                             <div class="modal-footer">
@@ -93,7 +93,7 @@
                                 <tr style="background-color: gray;color:white">
                                     <th style="width: 60px">No</th>
                                     <th style="width: 20%">#aksi</th>
-                                    <th>Nama Kategori Informasi</th>
+                                    <th>Nama Kategori Doa</th>
                                 </tr>
                                 <?php
                                 if ($kategori) {
@@ -125,9 +125,9 @@
                                                     <?php echo form_open("admin/kategori/update") ?>
                                                     <div class="modal-body">
                                                         <div class="form-group">
-                                                            <label for=""><b style="color: black">Nama Kategori Informasi <span style="color:red">*</span></b></label>
+                                                            <label for=""><b style="color: black">Nama Kategori Doa <span style="color:red">*</span></b></label>
                                                             <?php echo csrf(); ?>
-                                                            <input type="text" class="form-control" placeholder="Nama Kategori Informasi" name="kategori_name" required="required" value="<?php echo $key->kategori_name; ?>">
+                                                            <input type="text" class="form-control" placeholder="Nama Kategori Doa" name="kategori_name" required="required" value="<?php echo $key->kategori_name; ?>">
                                                             <input type="hidden" class="form-control" name="kategori_id" required="required" value="<?php echo $key->kategori_id; ?>">
                                                         </div>
                                                     </div>
@@ -152,9 +152,9 @@
                                                     </div>
                                                     <?php echo form_open("admin/kategori/delete") ?>
                                                     <div class="modal-body">
-                                                        Apakah anda yakin akan menghapus data kategori informasi : <?php echo $key->kategori_name; ?> ?
+                                                        Apakah anda yakin akan menghapus data kategori Doa : <?php echo $key->kategori_name; ?> ?
                                                         <?php echo csrf(); ?>
-                                                        <input type="hidden" class="form-control" placeholder="Nama Kategori Informasi" name="kategori_name" required="required" value="<?php echo $key->kategori_name; ?>">
+                                                        <input type="hidden" class="form-control" placeholder="Nama Kategori Doa" name="kategori_name" required="required" value="<?php echo $key->kategori_name; ?>">
                                                         <input type="hidden" class="form-control" name="kategori_id" required="required" value="<?php echo $key->kategori_id; ?>">
                                                     </div>
                                                     <div class="modal-footer">
@@ -178,7 +178,7 @@
                                                     </div>
 
                                                     <div class="modal-body">
-                                                        <b>Nama Kategori Informasi :</b><br><?php echo $key->kategori_name; ?>
+                                                        <b>Nama Kategori Doa :</b><br><?php echo $key->kategori_name; ?>
 
                                                     </div>
                                                     <div class="modal-footer">
@@ -200,13 +200,9 @@
                                         ';
                                 }
                                 ?>
-
-
                             </table>
                         </div>
                         <div class="box-footer">
-
-
 
                             <!-- PAGINATION -->
                             <div class="float-right"><?php echo $links; ?></div>

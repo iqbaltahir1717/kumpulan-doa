@@ -54,7 +54,7 @@
                             <div class="icon">
                                 <i class="fa fa-history"></i>
                             </div>
-                            <a href="<?php echo site_url('admin/news'); ?>" class="small-box-footer">
+                            <a href="<?php echo site_url('admin/riwayat'); ?>" class="small-box-footer">
                                 Selengkapnya <i class="fa fa-arrow-circle-right"></i>
                             </a>
                         </div>
@@ -69,7 +69,7 @@
                             <div class="icon">
                                 <i class="fa fa-book"></i>
                             </div>
-                            <a href="<?php echo site_url('admin/news'); ?>" class="small-box-footer">
+                            <a href="<?php echo site_url('admin/kategori'); ?>" class="small-box-footer">
                                 Selengkapnya <i class="fa fa-arrow-circle-right"></i>
                             </a>
                         </div>
@@ -84,7 +84,7 @@
                             <div class="icon">
                                 <i class="fa fa-rss-square"></i>
                             </div>
-                            <a href="<?php echo site_url('admin/news'); ?>" class="small-box-footer">
+                            <a href="<?php echo site_url('admin/panduan'); ?>" class="small-box-footer">
                                 Selengkapnya <i class="fa fa-arrow-circle-right"></i>
                             </a>
                         </div>

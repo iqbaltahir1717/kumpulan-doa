@@ -68,10 +68,12 @@
                                 <tr style="background-color: gray;color:white">
                                     <th style="width: 60px">No</th>
                                     <th style="width: 20%">#aksi</th>
-                                    <th>Title</th>
+                                    <th>Judul</th>
+                                    <th>Sumber</th>
+                                    <th>Riwayat</th>
                                     <th>Kategori</th>
                                     <th>Tingkat Kehaditsan</th>
-                                    <th>Riwayat</th>
+
                                     <th>Uploader</th>
                                 </tr>
                                 <?php
@@ -89,9 +91,28 @@
                                                 <button class="btn btn-xs btn-flat btn-danger" data-toggle="modal" data-target="#modalDelete<?php echo $key->doa_id; ?>">hapus</button>
                                             </td>
                                             <td><?php echo $key->doa_title; ?></td>
+                                            <td><?php echo $key->doa_sumber; ?></td>
+                                            <td>
+                                                <?php
+
+                                                if ($key->doa_sumber == "Al-Qur'an") {
+                                                    echo "-";
+                                                } else {
+                                                    $rsmex = explode(", ", $key->riwayat_id);
+                                                    foreach ($rsmex as $t) {
+                                                        foreach ($riwayat as $f) {
+                                                            if ($t == $f->riwayat_id) {
+                                                                echo $f->riwayat_name . ', ';
+                                                            } else {
+                                                                echo "";
+                                                            }
+                                                        }
+                                                    }
+                                                }
+                                                ?>
+                                            </td>
                                             <td><?php echo $key->kategori_name; ?></td>
                                             <td><?php echo $key->tingkat_hadits; ?></td>
-                                            <td><?php echo $key->riwayat_name; ?></td>
                                             <td><?php echo $key->user_fullname; ?></td>
                                         </tr>
 
@@ -102,14 +123,14 @@
                                             <div class="modal-dialog" role="document">
                                                 <div class="modal-content">
                                                     <div class="modal-header">
-                                                        <h5 class="modal-title" id="exampleModalLabel">Hapus Data</h5>
+                                                        <h5 class="modal-title" id="exampleModalLabel">Hapus Data Doa</h5>
                                                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                                             <i aria-hidden="true" class="ki ki-close"></i>
                                                         </button>
                                                     </div>
                                                     <?php echo form_open("admin/doa/delete") ?>
                                                     <div class="modal-body">
-                                                        Apakah anda yakin akan menghapus data berita ini ?
+                                                        Apakah anda yakin akan menghapus data doa ini ?
                                                         <?php echo csrf(); ?>
                                                         <input type="hidden" class="form-control" name="doa_id" required="required" value="<?php echo $key->doa_id; ?>">
                                                     </div>

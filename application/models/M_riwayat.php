@@ -12,6 +12,7 @@ class M_riwayat extends CI_Model
     {
         $this->db->select('riwayat_id, riwayat_name');
         $this->db->from('tbl_riwayat');
+        $this->db->where("riwayat_id != 0 ");
 
         if ($key != '') {
             $this->db->like("riwayat_name", $key);

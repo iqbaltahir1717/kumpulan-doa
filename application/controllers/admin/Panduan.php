@@ -6,13 +6,13 @@ class Panduan extends CI_Controller
     {
         parent::__construct();
         $this->load->model('m_panduan');
-        if (!$this->session->userdata('user_id') or $this->session->userdata('user_group') != 1) {
-            // ALERT
-            $alertStatus  = 'failed';
-            $alertMessage = 'Anda tidak memiliki Hak Akses atau Session anda sudah habis';
-            getAlert($alertStatus, $alertMessage);
-            redirect('admin/dashboard');
-        }
+        // if (!$this->session->userdata('user_id') or $this->session->userdata('user_group') != 1) {
+        //     // ALERT
+        //     $alertStatus  = 'failed';
+        //     $alertMessage = 'Anda tidak memiliki Hak Akses atau Session anda sudah habis';
+        //     getAlert($alertStatus, $alertMessage);
+        //     redirect('admin/dashboard');
+        // }
     }
 
 
@@ -100,6 +100,19 @@ class Panduan extends CI_Controller
 
         // TEMPLATE
         $view         = "_backend/_update_panduan";
+        $viewCategory = "all";
+        renderTemplate($data, $view, $viewCategory);
+    }
+
+    public function detail_page()
+    {
+        //DATA
+        $data['setting']       = getSetting();
+        $data['title']         = 'Update Panduan';
+        $data['panduan']          = $this->m_panduan->get($this->uri->segment(4));
+
+        // TEMPLATE
+        $view         = "_backend/_detail_panduan";
         $viewCategory = "all";
         renderTemplate($data, $view, $viewCategory);
     }

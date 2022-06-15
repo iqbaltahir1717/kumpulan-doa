@@ -34,8 +34,44 @@
                             <div class="row">
                                 <div class="col-md-12">
                                     <div class="form-group">
+                                        <?php if ($doa[0]->doa_sumber == "Al-Qur'an") { ?>
+                                            <label for=""><b style="color: black">Sumber <span style="color:red">*</span></b></label><br>
+                                            <input type="radio" id="sumber" checked name="doa_sumber" value="Al-Qur'an">
+                                            <span for="">&nbsp; Al-Qur'an</span>
+                                            <br>
+                                            <input type="radio" id="sumber2" name="doa_sumber" value="Hadits">
+                                            <span for="">&nbsp; Hadits</span>
+                                        <?php }  ?>
+                                        <?php if ($doa[0]->doa_sumber == "Hadits") { ?>
+                                            <label for=""><b style="color: black">Sumber <span style="color:red">*</span></b></label><br>
+                                            <input type="radio" id="sumber" name="doa_sumber" value="Al-Qur'an">
+                                            <span for="">&nbsp; Al-Qur'an</span>
+                                            <br>
+                                            <input type="radio" id="sumber2" checked name="doa_sumber" value="Hadits">
+                                            <span for="">&nbsp; Hadits</span>
+                                        <?php } ?>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for=""><b style="color: black">Riwayat <span style="color:red">*</span></b></label>
+                                        <select class="form-control select2" id="riwayat" name="riwayat_id[]" multiple required style="width:100%">
+                                            <?php
+                                            $rsmex = explode(", ", $doa[0]->riwayat_id);
+                                            foreach ($rsmex as $t) {
+                                                foreach ($riwayat as $f) {
+                                                    if ($t == $f->riwayat_id) {
+                                                        echo '<option value="' . $f->riwayat_id . '" selected>' . $f->riwayat_name . '</option>';
+                                                    } else {
+                                                        echo '<option value="' . $f->riwayat_id . '">' . $f->riwayat_name . '</option>';
+                                                    }
+                                                }
+                                            }
+                                            ?>
+
+                                        </select>
+                                    </div>
+                                    <div class="form-group">
                                         <label for=""><b style="color: black">Kategori <span style="color:red">*</span></b></label>
-                                        <select class="form-control select2" name="kategori_id" required style="width:100%">
+                                        <select class="form-control select2" id="kategori" name="kategori_id" required style="width:100%">
                                             <option value="">-Pilih Kategori-</option>
                                             <?php
                                             foreach ($kategori as $nw) {
@@ -51,7 +87,7 @@
                                     </div>
                                     <div class="form-group">
                                         <label for=""><b style="color: black">Tingkat Hadits <span style="color:red">*</span></b></label>
-                                        <select class="form-control select2" name="tingkat_hadits" required style="width:100%">
+                                        <select class="form-control select2" id="tingkat" name="tingkat_hadits" required style="width:100%">
                                             <option value="">-Pilih Tingkat Hadits-</option>
                                             <?php
                                             $hadits = array('Hadits Shahih', 'Hadits Hasan', 'Hadits Dho’if', 'Hadits Maudhu');
@@ -65,37 +101,11 @@
                                             ?>
                                         </select>
                                     </div>
-                                    <div class="form-group">
-                                        <label for=""><b style="color: black">Riwayat <span style="color:red">*</span></b></label>
-                                        <select class="form-control select2" name="riwayat_id" required style="width:100%">
-                                            <option value="">-Pilih Riwayat-</option>
-                                            <?php
-                                            foreach ($riwayat as $f) {
-                                                if ($doa[0]->riwayat_id == $f->riwayat_id) {
-                                                    echo '<option value="' . $f->riwayat_id . '" selected>' . $f->riwayat_name . '</option>';
-                                                } else {
-                                                    echo '<option value="' . $f->riwayat_id . '">' . $f->riwayat_name . '</option>';
-                                                }
-                                            }
-                                            ?>
-
-                                        </select>
-                                    </div>
-
-
 
                                     <div class="form-group">
                                         <label for=""><b style="color: black">Judul Doa <span style="color:red">*</span></b></label>
                                         <input type="text" class="form-control" placeholder="Judul Doa" name="doa_title" required="required" value="<?php echo $doa[0]->doa_title; ?>">
                                         <input type="hidden" class="form-control" name="doa_id" required="required" value="<?php echo $doa[0]->doa_id; ?>">
-                                        <input type="hidden" class="form-control" name="doa_cover_old" required="required" value="<?php echo $doa[0]->doa_cover; ?>">
-                                    </div>
-
-                                    <div class="form-group">
-                                        <label for=""><b style="color: black">Cover/Thumbnail Doa </b></label><br>
-                                        <span class="text-red">file sebelumnya: </span><a href="<?php echo base_url(); ?>upload/doa/<?php echo $doa[0]->doa_cover; ?>"><?php echo $doa[0]->doa_cover; ?></a>
-                                        <input type="file" class="form-control" placeholder="Judul Informasi" name="doa_cover" accept=".png, .jpeg, .jpg">
-
                                     </div>
 
                                     <div class="form-group">
@@ -115,3 +125,27 @@
                     </div>
                 </section>
             </div>
+            <script src="https://code.jquery.com/jquery-1.10.2.js"></script>
+            <script>
+                var update_sumber = function() {
+                    if ($("#sumber").is(":checked")) {
+                        $('#riwayat').prop('disabled', 'disabled');
+                        $('#tingkat').prop('disabled', 'disabled');
+                        $('#kategori').prop('disabled', 'disabled');
+                        $('#tingkat').removeAttr('required', false);
+                        $('#kategori').removeAttr('required', false);
+                        $('#riwayat').removeAttr('required', false);
+                    }
+                    if ($("#sumber2").is(":checked")) {
+                        $('#riwayat').removeAttr('disabled', false);
+                        $('#tingkat').removeAttr('disabled', false);
+                        $('#kategori').removeAttr('disabled', false);
+                        $('#riwayat').prop('required', 'required');
+                        $('#tingkat').prop('required', 'required');
+                        $('#kategori').prop('required', 'required');
+                    }
+                };
+                $(update_sumber);
+                $("#sumber").change(update_sumber);
+                $("#sumber2").change(update_sumber);
+            </script>
