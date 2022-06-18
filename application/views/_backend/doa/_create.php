@@ -1,4 +1,3 @@
-<script src="https://code.jquery.com/jquery-1.10.2.js"></script>
 <div class="content-wrapper">
     <section class="content-header">
         <h1 class="fontPoppins">
@@ -69,11 +68,7 @@
                                 <?php
                                 $hadits = array('Hadits Shahih', 'Hadits Hasan', 'Hadits Dho’if', 'Hadits Maudhu');
                                 for ($c = 0; $c < count($hadits); $c++) {
-                                    if ($hadits[$c] == $doa[0]->tingkat_hadits) {
-                                        echo '<option value="' . $hadits[$c] . '" selected>' . $hadits[$c] . '</option>';
-                                    } else {
-                                        echo '<option value="' . $hadits[$c] . '">' . $hadits[$c] . '</option>';
-                                    }
+                                    echo '<option value="' . $hadits[$c] . '" >' . $hadits[$c] . '</option>';
                                 }
                                 ?>
                             </select>
@@ -97,6 +92,7 @@
         </div>
     </section>
 </div>
+<script src="https://code.jquery.com/jquery-1.10.2.js"></script>
 <script>
     var update_sumber = function() {
         if ($("#sumber").is(":checked")) {
