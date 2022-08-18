@@ -108,7 +108,7 @@ class Panduan extends CI_Controller
     {
         //DATA
         $data['setting']       = getSetting();
-        $data['title']         = 'Update Panduan';
+        $data['title']         = 'Detail Panduan';
         $data['panduan']          = $this->m_panduan->get($this->uri->segment(4));
 
         // TEMPLATE
